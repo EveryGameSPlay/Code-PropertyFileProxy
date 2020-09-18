@@ -78,8 +78,6 @@ namespace Gasanov.Utils.SaveUtilities
         protected virtual void LoadProperties()
         {
             var sr = new StreamReader(FileStream);
-
-            var regex = new Regex(AnyPropertyPattern);
             
             // Пока не конец файла
             while (!sr.EndOfStream)

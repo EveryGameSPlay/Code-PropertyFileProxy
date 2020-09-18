@@ -26,24 +26,25 @@ namespace Gasanov.Utils.SaveUtilities
         /// </summary>
         public static PropertyFileProxy GetProxy(string filePath, bool createDefault = true)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(SaveFolder + filePath + SaveExtension));
-            
-            if (File.Exists(SaveFolder + filePath + SaveExtension))
+            var path = SaveFolder + filePath + SaveExtension;
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+            if (File.Exists(path))
             {
-                var fs = File.Open(SaveFolder + filePath + SaveExtension,
+                var fs = File.Open(path,
                     FileMode.Open, FileAccess.ReadWrite);
-                
-                return new PropertyFileProxy(fs);
+
+                 return new PropertyFileProxy(fs);
             }
 
             if (createDefault)
             {
-                var fs = new FileStream(SaveFolder+filePath+SaveExtension, FileMode.Create,
+                var fs = new FileStream(path, FileMode.Create,
                     FileAccess.ReadWrite);
-                
+
                 return new PropertyFileProxy(fs);
             }
-            
+
             throw new FileNotFoundException();
         }
 
